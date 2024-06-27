@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 
@@ -15,6 +15,9 @@ DEFAULT_APPS = [
 ]
 CUSTOM_APPS = [
     # Custom application
+    'apps.reader',
+    'apps.book',
+    'apps.myread'
 ]
 THIRD_PARTY_APPS = [
     # Third-party application
@@ -89,3 +92,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Inform Djangoabout the new user model
+AUTH_USER_MODEL = 'reader.Reader'
