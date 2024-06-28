@@ -37,7 +37,7 @@ class MyRead(models.Model):
                         start_read_date__isnull=True
                     )
                     | models.Q(
-                        percentage_read__gt=100,
+                        percentage_read__gt=0,
                         start_read_date__isnull=False
                     )
                 )
@@ -56,11 +56,13 @@ class MyRead(models.Model):
                 )
             )
         ]
+    def __str__(self):
+        return f'{self.reader_username}({self.book_isbn}/{self.percentage_read})'
 
 class StatusPercent(models.Model):
     SP_CHOICE = {
         "pending": "Pending",
-        "reading": "Reeading",
+        "reading": "Reading",
         "done": "Done"
     }
     id = models.PositiveSmallIntegerField(primary_key=True)
@@ -78,3 +80,7 @@ class StatusPercent(models.Model):
                 check=models.Q(read_status__in=['pending', 'reading', 'done'])
             )
         ]
+
+    def __str__(self) -> str:
+        # When dealing with models method, migration is not needed
+        return f'{self.read_status}'

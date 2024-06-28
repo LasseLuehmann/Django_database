@@ -18,3 +18,6 @@ dev-sqlm:
 	
 dev-dbshell:
 	python3 manage.py dbshell --settings=config.settings.dev
+
+dev-shell:
+	python3 manage.py shell --settings=config.settings.dev

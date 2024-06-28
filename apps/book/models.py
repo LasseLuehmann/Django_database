@@ -26,3 +26,6 @@ class Book(models.Model):
     lang = models.CharField(max_length=50)
     edition = models.SmallIntegerField(null=True, blank=True)
     book_format = models.CharField(max_length=2, choices=BOOK_FORMAT, default="eb")
+
+    def __str__(self):
+        return f'{self.title}'
