@@ -3,6 +3,11 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
+class BookManager(models.Manager):
+
+    def get_book_by_tags(self, *tags):
+        return self.filter(tags__name__in=tags)
+
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, null=True, blank=True)
@@ -62,6 +67,16 @@ class Book(models.Model):
     lang = models.CharField(max_length=50)
     edition = models.SmallIntegerField(null=True, blank=True)
     book_format = models.CharField(max_length=2, choices=BOOK_FORMAT, default="eb")
+
+    objects = BookManager()
+
+    # @classmethod
+    # def get_book_by_tags(cls, *tags):
+    #     return cls.objects.filter(tags__name__in=tags)
+
+    @property
+    def get_desc(self):
+        return f'{self.description[0:30]}...'
 
     def __str__(self):
         return f'{self.title}'
