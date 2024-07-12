@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+from apps.core.models import CreatedModifiedAbstract
 # Create your models here.
 
 class BookManager(models.Manager):
@@ -29,6 +29,9 @@ class BookAuthor(models.Model):
     def __str__(self):
         return f'{self.author} {self.role} {self.book}'
     
+    class Meta:
+        verbose_name_plural = 'Books and Authors'
+    
 class Tag(models.Model):
     # TAG_NAME = {
     #     'sc': 'Science',
@@ -42,7 +45,7 @@ class Tag(models.Model):
         return f'{self.name} ({self.id})'
 
 
-class Book(models.Model):
+class Book(CreatedModifiedAbstract):
     BOOK_CATEGORY = {
         "pr": "programming",
         "ar": "art",
@@ -56,14 +59,14 @@ class Book(models.Model):
     }
     isbn = models.CharField(max_length=13, primary_key=True)
     title = models.CharField(max_length=50)
-    tags = models.ManyToManyField('book.Tag', related_name='tag')
+    tags = models.ManyToManyField('book.Tag')
     description = models.TextField(null=True, blank=True)
     page_count = models.PositiveSmallIntegerField()
     category = models.CharField(max_length=2, choices=BOOK_CATEGORY, default="pr")
     published_date = models.IntegerField()
     publisher = models.CharField(max_length=50)
     #authors = ArrayField(ArrayField(models.CharField(max_length=50)))
-    authors = models.ManyToManyField('book.Author', related_name='book', through='book.BookAuthor')
+    authors = models.ManyToManyField('book.Author', through='book.BookAuthor')
     lang = models.CharField(max_length=50)
     edition = models.SmallIntegerField(null=True, blank=True)
     book_format = models.CharField(max_length=2, choices=BOOK_FORMAT, default="eb")
@@ -80,3 +83,7 @@ class Book(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+    
+    class Meta:
+        ordering = ('title',)
+        default_related_name = '%(app_label)s_%(model_name)s'

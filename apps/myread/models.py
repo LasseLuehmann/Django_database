@@ -4,6 +4,7 @@ from django.contrib.postgres.validators import (
     RangeMaxValueValidator,
     RangeMinValueValidator
 )
+from apps.core.models import CreatedModifiedAbstract
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class MyRead(models.Model):
     end_read_date = models.DateField(null=True, blank=True)
 
     class Meta:
+        unique_together = ('book_isbn', 'reader_username', 'start_read_date')
         constraints = [
             models.CheckConstraint(
                 name='%(app_label)s_%(class)s_per_read_check',

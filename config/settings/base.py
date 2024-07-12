@@ -17,7 +17,8 @@ CUSTOM_APPS = [
     # Custom application
     'apps.reader',
     'apps.book',
-    'apps.myread'
+    'apps.myread',
+    'apps.core'
 ]
 THIRD_PARTY_APPS = [
     # Third-party application

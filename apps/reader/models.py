@@ -1,6 +1,7 @@
 from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from apps.core.models import CreatedModifiedAbstract
 
 # Create your models here.
 # Reader -> AbstractUser -> AbstractBaseUser -> models.Model
@@ -18,6 +19,10 @@ class NIC(models.Model):
 
     def __str__(self):
         return f'{self.nic_number}(del: {self.delivery_date}, exp: {self.expiration_date})'
+    
+    class Meta:
+        db_table_comment = 'National Identity Card'
+        verbose_name_plural = 'NIC'
 
 
 class Reader(AbstractUser):
@@ -40,6 +45,7 @@ class Reader(AbstractUser):
         )
 
     class Meta:
+        db_table = 'reader'
         constraints = [
             models.CheckConstraint(
                 name='%(app_label)s_%(class)s_title_check',

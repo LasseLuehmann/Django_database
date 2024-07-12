@@ -1,5 +1,0 @@
-# book = Book.objects.filter(description__icontains='science')
-# book = Book.objects.filter(title__istartswith='A')
-# book = Book.objects.filter(description='')
-# myread = MyRead.objects.filter(start_read_date__year__gte=2020)
-# myread = MyRead.objects.filter(start_read_date__year__in=[2021,2023,2024])
