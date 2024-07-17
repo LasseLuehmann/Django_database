@@ -1,54 +1,23 @@
+{% extends "base.html" %} 
 {% load custom_tags_myread %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body{
-            background-color: #fdf3ed;
-            text-align: center;
-        }
-        h1{
-            display: flex;
-            justify-content: center;
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 500%;
-            color: #888;
-            text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, -1px 1px 1px #000,
-            1px -1px 1px #000;
-        }
-        h2{
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-color: #888;
-            text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, -1px 1px 1px #000,
-            1px -1px 1px #000;
-        }
-        section{
-        }
-        li{
-            list-style: none;
-            margin-bottom: 10px;
-        }
-    </style>
-    <title>MyRead App</title>
-</head>
-<body>
+{% block title %}
+    {{ block.super }}
+{% endblock title %}
+
+{% block content %}
     <h1>Welcome to MyRead App</h1>
-        <section>
-            <!-- Template vaiable have a double curly braces -->
-            <p>{{ total_readers_cnt }} total reader{{total_readers_cnt|pluralize}} and counting!</p>
-            <p>{{ engaged_reader_cnt }} active reader{{engaged_reader_cnt|pluralize}} and counting!</p>
-          
-            <h2>Books count per category</h2>
-            <ul>
-            <!-- Template Tags have a single curly braces and a percentage sign on both sides -->
-                {% for item in books_per_category %}
-                <li>{{ item.category|extract_constance }}: {{ item.cnt }}</li>
-                <!-- in order to use a for loop inside the template you need to add a endfor tag -->
-                {% endfor %}
-            </ul>
-        </section>
-</body>
-</html>
+        <!-- Template vaiable have a double curly braces -->
+        <p>{{ total_readers_cnt }} total reader{{total_readers_cnt|pluralize}} and counting!</p>
+        <p>{{ engaged_reader_cnt }} active reader{{engaged_reader_cnt|pluralize}} and counting!</p>
+        
+        <h2>Books count per category</h2>
+        <ul>
+        <!-- Template Tags have a single curly braces and a percentage sign on both sides -->
+            {% for item in books_per_category %}
+            <li>{{ item.category|extract_constance }}: {{ item.cnt }}</li>
+            <!-- in order to use a for loop inside the template you need to add a endfor tag -->
+            {% endfor %}
+        </ul>
+{% endblock content %}
+    

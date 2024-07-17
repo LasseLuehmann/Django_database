@@ -1,0 +1,105 @@
+{% extends "base.html" %} <!-- inherit. Should be the first thing -->
+{% load static %}
+
+{% block title %}
+    {{block.super}} - {{book.title}}
+{% endblock title %}
+
+{% block stylesheet %}
+    {{ block.super }}
+    <link rel='stylesheet' href="{% static 'css/form.css' %}" >
+{% endblock stylesheet %}
+
+{% block content %}
+<h1>Share your book</h1>
+<div class='post-form'>
+    <form method='post'>
+        {% csrf_token %}
+        <div class='form-element'>
+            <label for='isbn_input'>isbn:</label>
+            <input
+                id='isbn_input',
+                name='isbn_input',
+                type='text',
+                vlaue='',
+                placeholder='Enter isbn'
+            />
+        </div>
+        <div class='form-element'>
+            <label for='title_input'>title:</label>
+            <input
+                id='title_input',
+                name='title_input',
+                type='text',
+                vlaue='',
+                placeholder='Enter title'
+            />
+        </div>
+        <div class='form-element'>
+            <label for='pages_input'>pages:</label>
+            <input
+                id='pages_input',
+                name='pages_input',
+                type='number',
+                vlaue='',
+                placeholder='Enter pages'
+            />
+        </div>
+        <div class='form-element'>
+            <label for='description_input'>description:</label>
+            <textarea
+                id='description_input',
+                name='description_input',
+                type='textarea',
+                vlaue='',
+                placeholder='Enter description'
+            ></textarea>
+        </div>
+        <div class='form-cat'>
+            <hr />
+            <h4>Categories</h4>
+            <div>
+                <input
+                    id='cat_prog_radio',
+                    type='radio',
+                    value='pr'
+                />
+                <label for='cat_prog_radio'>Programming</label>
+            </div>
+            <div>
+                <input
+                    id='cat_prog_radio',
+                    type='radio',
+                    value='ar'
+                />
+                <label for='cat_prog_radio'>Art</label>
+            </div>
+            <div>
+                <input
+                    id='cat_prog_radio',
+                    type='radio',
+                    value='hi'
+                />
+                <label for='cat_prog_radio'>History</label>
+            </div>
+            <div>
+                <input
+                    id='cat_prog_radio',
+                    type='radio',
+                    value='po'
+                />
+                <label for='cat_prog_radio'>Politics</label>
+            </div>
+            <div>
+                <input
+                    id='cat_prog_radio',
+                    type='radio',
+                    value='ot'
+                />
+                <label for='cat_prog_radio'>Other</label>
+            </div>
+        </div>
+        <input type='submit' value='Submit' />
+    </form>
+</div>
+{% endblock content %}

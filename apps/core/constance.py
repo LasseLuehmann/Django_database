@@ -23,3 +23,12 @@ READER_TITLE = {
         "Ms": "Ms",
         "Dr": "Dr"
     }
+
+LANGUAGES = {
+        "en": "english",
+        "de": "deutsch",
+        "da": "dansk",
+        "it": "italian",
+        "sp": "spanish",
+        "es": "estonia"
+}
