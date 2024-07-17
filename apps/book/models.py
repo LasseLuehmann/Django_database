@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from apps.core.models import CreatedModifiedAbstract
+from apps.core.constance import BOOK_CATEGORY, BOOK_AUTHOR_ROLE, BOOK_FORMAT
 # Create your models here.
 
 class BookManager(models.Manager):
@@ -17,11 +18,7 @@ class Author(models.Model):
         return f'{self.first_name} {self.last_name}'
     
 class BookAuthor(models.Model):
-    BOOK_AUTHOR_ROLE = {
-        'author' : 'Author',
-        'co_author' : 'Co-Author',
-        'editor' : 'Editor'
-    }
+    
     book = models.ForeignKey('book.Book', on_delete=models.CASCADE)
     author = models.ForeignKey('book.Author', on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=BOOK_AUTHOR_ROLE, default='author')
@@ -42,21 +39,11 @@ class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
-        return f'{self.name} ({self.id})'
+        return f'{self.name}'
 
 
 class Book(CreatedModifiedAbstract):
-    BOOK_CATEGORY = {
-        "pr": "programming",
-        "ar": "art",
-        "hi": "history",
-        "po": "politics",
-        "ot": "other"
-    }
-    BOOK_FORMAT = {
-        "eb": "ebook",
-        "hc": "hardcover"
-    }
+    
     isbn = models.CharField(max_length=13, primary_key=True)
     title = models.CharField(max_length=50)
     tags = models.ManyToManyField('book.Tag')

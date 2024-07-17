@@ -1,0 +1,38 @@
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        body{
+            background-color: #fdf3ed;
+            text-align: center;
+        }
+        h1{
+            display: flex;
+            justify-content: center;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 500%;
+            color: #888;
+            text-shadow: 1px 1px 1px #000,  -1px 1px 1px #000,
+            1px -1px 1px #000;
+        }
+    </style>
+    <title>Details {{book.isbn}}</title>
+</head>
+<body>
+    <h1>{{book.title}}</h1>
+            <p><b>isbn</b>: {{book.isbn}}</p>
+            <p><b>description</b>: {{book.description}}</p>
+            <p><b>Pages</b>: {{book.page_count}}</p>
+            <p><b>Published Year</b>: {{book.published_date}}</p>
+            <p><b>Publisher</b>: {{book.publisher}}</p>
+            <p><b>Authors</b>: {{book.authors|extract_values|semi_colon_seperator}}</p>
+            <p><b>Language</b>: {{book.lang}}</p>
+            <p><b>Edition</b>: {{book.edition}}</p>
+            <p><b>Format</b>: {{book.book_format|extract_constance}}</p>
+            <p><b>Category</b>: {{book.category|extract_constance}}</p>
+            <p><b>related Tags</b>: {{book.tags|extract_values|semi_colon_seperator}}</p>
+</body>
+</html>
